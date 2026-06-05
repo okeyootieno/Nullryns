@@ -96,7 +96,7 @@ export default function Team() {
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-serif font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{member.name}</h3>
-                  <p className="text-sm font-sans text-accent font-semibold tracking-wide uppercase mb-4">{member.role}</p>
+                  <p className="text-sm font-sans font-semibold tracking-wide uppercase mb-4" style={{ color: '#C4A484' }}>{member.role}</p>
                   <div className="flex flex-wrap justify-center gap-2">
                     {member.skills.slice(0, 3).map(skill => (
                       <span key={skill} className="text-xs bg-secondary/10 text-secondary-foreground px-2 py-1 rounded">
@@ -126,7 +126,7 @@ export default function Team() {
                     <DialogTitle className="text-3xl font-serif font-bold text-foreground mb-2">
                       {selectedMember.name}
                     </DialogTitle>
-                    <p className="text-accent font-semibold font-sans tracking-wide uppercase mb-4">
+                    <p className="font-semibold font-sans tracking-wide uppercase mb-4" style={{ color: '#C4A484' }}>
                       {selectedMember.role}
                     </p>
                     <div className="flex flex-wrap justify-center md:justify-start gap-2">
