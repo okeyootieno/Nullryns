@@ -1,0 +1,642 @@
+Below is a comprehensive prompt you can copy directly into Replit AI. It is written as a product specification, UI/UX guide, content strategy, and technical implementation plan.
+
+---
+
+# PROMPT FOR REPLIT AI
+
+Build a modern, professional, premium software company website for our team called **Nullryns (Øryns)**.
+
+The website should be built using:
+
+* React + Vite
+* JavaScript
+* CSS Modules or organized CSS files
+* React Router
+* Framer Motion for animations
+* Responsive Mobile-First Design
+* SEO Optimized
+* Dark and Light Mode
+* Professional corporate appearance
+
+---
+
+# COMPANY INFORMATION
+
+## Company Name
+
+**Nullryns (Øryns)**
+
+## Tagline
+
+> Building Digital Solutions. Nurturing Future Innovators.
+
+Alternative tagline:
+
+> Websites. Mobile Apps. Business Systems. Future Developers.
+
+---
+
+# ABOUT US
+
+Nullryns (Øryns) is a software development collective made up of passionate developers, designers, problem solvers, and innovators.
+
+We specialize in:
+
+* Website Development
+* Web Applications
+* Android Applications
+* iOS Applications
+* Business Management Systems
+* School Management Systems
+* POS Systems
+* API Development
+* Database Design
+* Software Consulting
+* UI/UX Design
+* Technical Training & Mentorship
+
+We don't just build technology.
+
+We also nurture aspiring software developers through mentorship, practical projects, and collaborative learning.
+
+---
+
+# TEAM MEMBERS
+
+Create a dedicated Team section.
+
+## Telvin Ochieng
+
+Role:
+Founder & Lead Software Engineer
+
+Responsibilities:
+
+* Project Architecture
+* Backend Development
+* Strategic Planning
+* Team Leadership
+
+---
+
+## Clinton Nzau
+
+Role:
+Full Stack Developer
+
+Responsibilities:
+
+* Frontend Development
+* Backend Integration
+* Database Design
+
+---
+
+## Michael Mike
+
+Role:
+Software Developer
+
+Responsibilities:
+
+* Application Development
+* Testing
+* Maintenance
+
+---
+
+## Gildysia Naomi
+
+Role:
+UI/UX Designer & Product Specialist
+
+Responsibilities:
+
+* User Experience Design
+* Product Research
+* Interface Design
+
+---
+
+## Stephen Githu
+
+Role:
+Mobile App Developer
+
+Responsibilities:
+
+* Android Development
+* iOS Development
+* Mobile Optimization
+
+---
+
+## Levince Okeyo
+
+Role:
+Software Engineer & Solutions Architect
+
+Responsibilities:
+
+* System Design
+* Software Development
+* Client Solutions
+* Business Analysis
+
+---
+
+# BRANDING
+
+The logo is based on:
+
+* A tree
+* Growth
+* Knowledge
+* Innovation
+* Branching ideas
+* Technology rooted in strong foundations
+
+The website should use the uploaded Øryns logo.
+
+Create a favicon from the logo.
+
+---
+
+# TYPOGRAPHY
+
+Use Google Fonts:
+
+## Headings
+
+Playfair Display
+
+Usage:
+
+* Hero titles
+* Section titles
+* Important headings
+
+---
+
+## Body
+
+Lato
+
+Usage:
+
+* Navigation
+* Paragraphs
+* Cards
+* Buttons
+
+---
+
+# COLOR PALETTE
+
+Inspired by the logo.
+
+## Primary
+
+#3B2A1E
+
+Rich Walnut Brown
+
+---
+
+## Secondary
+
+#5E4634
+
+Wood Brown
+
+---
+
+## Accent
+
+#C4A484
+
+Warm Gold
+
+---
+
+## Background Light
+
+#FAF7F2
+
+---
+
+## Background Dark
+
+#121212
+
+---
+
+## Text Dark
+
+#1A1A1A
+
+---
+
+## Text Light
+
+#FFFFFF
+
+---
+
+# WEBSITE STRUCTURE
+
+Create the following pages:
+
+---
+
+## Home
+
+Hero section
+
+Large statement:
+
+# Building Digital Solutions That Matter
+
+Subtext:
+
+We create websites, mobile applications, business systems, and innovative software solutions while mentoring the next generation of developers.
+
+Buttons:
+
+* View Our Work
+* Contact Us
+
+Background:
+
+Subtle animated version of the Øryns tree.
+
+---
+
+### Statistics Section
+
+Display:
+
+* 6 Team Members
+* Multiple Projects Delivered
+* Web & Mobile Solutions
+* Developer Mentorship Program
+
+Animated counters.
+
+---
+
+### Services Preview
+
+Cards:
+
+* Web Development
+* Mobile Apps
+* Business Systems
+* UI/UX Design
+* Software Consulting
+* Developer Training
+
+---
+
+### Featured Projects
+
+Display project cards.
+
+Include image placeholders.
+
+Hover effects.
+
+---
+
+### Testimonials
+
+Professional carousel.
+
+---
+
+## About Page
+
+Include:
+
+### Our Story
+
+How Nullryns was formed.
+
+Mission:
+
+Build impactful software.
+
+Vision:
+
+Become a respected technology collective creating solutions that improve lives and businesses.
+
+Values:
+
+* Innovation
+* Integrity
+* Growth
+* Collaboration
+* Excellence
+
+---
+
+## Services Page
+
+Create detailed service cards.
+
+### Website Development
+
+* Company Websites
+* Portfolios
+* Landing Pages
+* E-commerce
+
+---
+
+### Web Applications
+
+* Dashboards
+* SaaS Platforms
+* Management Systems
+
+---
+
+### Mobile Development
+
+* Android Apps
+* iOS Apps
+* Cross Platform Apps
+
+---
+
+### Business Systems
+
+* POS Systems
+* School Management Systems
+* Inventory Systems
+* ERP Solutions
+
+---
+
+### Developer Training
+
+* Beginner Programming
+* Project Mentorship
+* Software Engineering Guidance
+
+---
+
+## Projects Page
+
+Professional portfolio layout.
+
+Project categories:
+
+* Websites
+* Web Apps
+* Mobile Apps
+* Client Systems
+
+Each project should include:
+
+* Screenshot
+* Description
+* Technologies
+* Live Demo Button
+* GitHub Button
+
+Filtering system.
+
+---
+
+## Team Page
+
+Beautiful team profiles.
+
+Each member should have:
+
+* Profile Image Placeholder
+* Name
+* Role
+* Biography
+* Skills
+* Social Links
+
+Add animated cards.
+
+---
+
+## Training & Mentorship Page
+
+Describe how Øryns nurtures future developers.
+
+Include:
+
+### What We Teach
+
+* HTML
+* CSS
+* JavaScript
+* React
+* Node.js
+* Databases
+* Mobile Development
+
+---
+
+### Learning Path
+
+1. Fundamentals
+2. Practical Projects
+3. Team Collaboration
+4. Real Client Projects
+
+---
+
+### Join Program Button
+
+---
+
+## Contact Page
+
+Professional contact form.
+
+Fields:
+
+* Full Name
+* Email
+* Phone
+* Company
+* Service Interested In
+* Message
+
+---
+
+# CONTACT DETAILS
+
+Email:
+
+[Nullryns@atomicmail.com](mailto:Nullryns@atomicmail.com)
+
+GitHub:
+
+Use GitHub username:
+
+Nullryns
+
+Display GitHub icon and profile link.
+
+---
+
+# NAVIGATION
+
+Sticky Navbar
+
+Logo left.
+
+Links:
+
+* Home
+* About
+* Services
+* Projects
+* Team
+* Training
+* Contact
+
+Desktop:
+
+Horizontal.
+
+Mobile:
+
+Hamburger menu.
+
+---
+
+# FOOTER
+
+Use the same style as the provided letterhead.
+
+Include:
+
+Logo
+
+Quick Links
+
+Services
+
+Contact
+
+Email:
+
+[Nullryns@atomicmail.com](mailto:Nullryns@atomicmail.com)
+
+GitHub:
+
+Nullryns
+
+Copyright:
+
+© 2026 Nullryns (Øryns). All Rights Reserved.
+
+---
+
+# ANIMATIONS
+
+Use Framer Motion.
+
+Add:
+
+* Fade In
+* Slide Up
+* Scroll Reveal
+* Hover Lift Effects
+* Animated Counters
+* Smooth Page Transitions
+
+Keep animations elegant and professional.
+
+---
+
+# SEO
+
+Create:
+
+* Meta Titles
+* Meta Descriptions
+* Open Graph Tags
+* Structured Data
+
+Keywords:
+
+Software Development Kenya,
+Website Development,
+Mobile App Development,
+Web Applications,
+Software Solutions,
+React Developers,
+Node.js Developers,
+Business Systems,
+Tech Training,
+Nullryns
+
+---
+
+# PERFORMANCE
+
+Requirements:
+
+* Lighthouse Score above 90
+* Lazy Load Images
+* Code Splitting
+* Responsive Design
+* Accessibility Standards
+
+---
+
+# EXTRA PREMIUM FEATURES
+
+Implement:
+
+* Dark Mode Toggle
+* Scroll Progress Indicator
+* Back To Top Button
+* Animated Tree Background
+* Project Filtering
+* Team Member Modal Profiles
+* Download Company Profile PDF Button
+* WhatsApp Floating Button
+* Contact Form Validation
+* Loading Screen with Øryns Logo
+
+---
+
+# DESIGN DIRECTION
+
+The website should feel like a mix of:
+
+* Modern Tech Company
+* Premium Design Studio
+* Professional Consultancy
+* Startup Innovation Hub
+
+Think:
+
+* Elegant
+* Minimalist
+* Premium
+* Trustworthy
+* Corporate
+* Modern
+
+The tree logo should symbolize growth, knowledge, mentorship, innovation, and branching possibilities throughout the design.
+
+Generate the complete project structure, all React components, routing, CSS styling, assets organization, and responsive layouts ready to run with:
+
+```bash
+npm install
+npm run dev
+```
+
+Produce production-quality code, not placeholder scaffolding.

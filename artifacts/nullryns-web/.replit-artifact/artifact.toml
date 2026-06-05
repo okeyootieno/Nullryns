@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Nullryns Website"
+version = "1.0.0"
+id = "artifacts/nullryns-web"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20248
+
+[services.development]
+run = "pnpm --filter @workspace/nullryns-web run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nullryns-web", "run", "build" ]
+publicDir = "artifacts/nullryns-web/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20248"
+BASE_PATH = "/"
