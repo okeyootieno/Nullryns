@@ -99,7 +99,7 @@ export default function Team() {
                   <p className="text-sm font-sans font-semibold tracking-wide uppercase mb-4" style={{ color: '#C4A484' }}>{member.role}</p>
                   <div className="flex flex-wrap justify-center gap-2">
                     {member.skills.slice(0, 3).map(skill => (
-                      <span key={skill} className="text-xs bg-secondary/10 text-secondary-foreground px-2 py-1 rounded">
+                      <span key={skill} className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
                         {skill}
                       </span>
                     ))}
@@ -131,7 +131,7 @@ export default function Team() {
                     </p>
                     <div className="flex flex-wrap justify-center md:justify-start gap-2">
                       {selectedMember.skills.map(skill => (
-                        <span key={skill} className="text-xs font-mono bg-secondary/10 text-secondary-foreground px-2 py-1 rounded border border-border">
+                        <span key={skill} className="text-xs font-mono bg-primary/10 text-primary px-3 py-1 rounded-full font-medium border border-primary/20">
                           {skill}
                         </span>
                       ))}
