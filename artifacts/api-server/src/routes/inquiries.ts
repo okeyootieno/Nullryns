@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@workspace/db";
 import { inquiriesTable } from "@workspace/db";
 import { SubmitInquiryBody, UpdateInquiryStatusBody } from "@workspace/api-zod";
+import { requireAdmin } from "../middleware/requireAdmin";
 
 const inquiriesRouter = Router();
 
@@ -50,13 +51,13 @@ inquiriesRouter.post("/inquiries", async (req, res) => {
   res.status(201).json(toJson(row));
 });
 
-inquiriesRouter.get("/inquiries", async (req, res) => {
+inquiriesRouter.get("/inquiries", requireAdmin, async (req, res) => {
   const rows = await db.select().from(inquiriesTable).orderBy(inquiriesTable.createdAt);
   res.json(rows.map(toJson));
 });
 
-inquiriesRouter.patch("/inquiries/:id/status", async (req, res) => {
-  const id = parseInt(req.params.id, 10);
+inquiriesRouter.patch("/inquiries/:id/status", requireAdmin, async (req, res) => {
+  const id = parseInt(req.params.id as string, 10);
   if (isNaN(id)) {
     res.status(400).json({ error: "Invalid inquiry ID" });
     return;

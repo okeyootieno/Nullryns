@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "@workspace/db";
 import { contactMessagesTable } from "@workspace/db";
 import { SubmitContactBody } from "@workspace/api-zod";
+import { requireAdmin } from "../middleware/requireAdmin";
 
 const contactRouter = Router();
 
@@ -31,7 +32,7 @@ contactRouter.post("/contact", async (req, res) => {
   });
 });
 
-contactRouter.get("/contact", async (req, res) => {
+contactRouter.get("/contact", requireAdmin, async (req, res) => {
   const rows = await db.select().from(contactMessagesTable).orderBy(contactMessagesTable.createdAt);
   res.json(
     rows.map((r) => ({
