@@ -17,5 +17,6 @@ export interface ContactMessage {
   /** @nullable */
   service?: string | null;
   message: string;
+  isRead: boolean;
   createdAt: Date;
 }

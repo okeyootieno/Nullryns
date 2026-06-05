@@ -67,6 +67,56 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ContactMessage"
+  /contact/{id}/read:
+    patch:
+      operationId: markContactMessageRead
+      tags: [contact]
+      summary: Mark contact message as read
+      description: Marks a contact message as read
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Message marked as read
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactMessage"
+        "404":
+          description: Message not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+  /inquiries/{id}/read:
+    patch:
+      operationId: markInquiryRead
+      tags: [inquiries]
+      summary: Mark inquiry as read
+      description: Marks a project inquiry as read
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Inquiry marked as read
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "404":
+          description: Inquiry not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
   /inquiries/{id}/status:
     patch:
       operationId: updateInquiryStatus
@@ -181,6 +231,7 @@ components:
         - fullName
         - email
         - message
+        - isRead
         - createdAt
       properties:
         id:
@@ -197,6 +248,8 @@ components:
           type: ["string", "null"]
         message:
           type: string
+        isRead:
+          type: boolean
         createdAt:
           type: string
           format: date-time
@@ -237,6 +290,7 @@ components:
         - serviceType
         - description
         - status
+        - isRead
         - createdAt
       properties:
         id:
@@ -259,6 +313,8 @@ components:
           type: string
         status:
           type: string
+        isRead:
+          type: boolean
         createdAt:
           type: string
           format: date-time

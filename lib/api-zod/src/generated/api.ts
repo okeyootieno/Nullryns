@@ -47,9 +47,55 @@ export const ListContactMessagesResponseItem = zod.object({
   "company": zod.string().nullish(),
   "service": zod.string().nullish(),
   "message": zod.string(),
+  "isRead": zod.boolean(),
   "createdAt": zod.coerce.date()
 })
 export const ListContactMessagesResponse = zod.array(ListContactMessagesResponseItem)
+
+
+/**
+ * Marks a contact message as read
+ * @summary Mark contact message as read
+ */
+export const MarkContactMessageReadParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const MarkContactMessageReadResponse = zod.object({
+  "id": zod.number(),
+  "fullName": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "company": zod.string().nullish(),
+  "service": zod.string().nullish(),
+  "message": zod.string(),
+  "isRead": zod.boolean(),
+  "createdAt": zod.coerce.date()
+})
+
+
+/**
+ * Marks a project inquiry as read
+ * @summary Mark inquiry as read
+ */
+export const MarkInquiryReadParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const MarkInquiryReadResponse = zod.object({
+  "id": zod.number(),
+  "fullName": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "company": zod.string().nullish(),
+  "serviceType": zod.string(),
+  "budgetRange": zod.string().nullish(),
+  "timeline": zod.string().nullish(),
+  "description": zod.string(),
+  "status": zod.string(),
+  "isRead": zod.boolean(),
+  "createdAt": zod.coerce.date()
+})
 
 
 /**
@@ -75,6 +121,7 @@ export const UpdateInquiryStatusResponse = zod.object({
   "timeline": zod.string().nullish(),
   "description": zod.string(),
   "status": zod.string(),
+  "isRead": zod.boolean(),
   "createdAt": zod.coerce.date()
 })
 
@@ -115,6 +162,7 @@ export const ListInquiriesResponseItem = zod.object({
   "timeline": zod.string().nullish(),
   "description": zod.string(),
   "status": zod.string(),
+  "isRead": zod.boolean(),
   "createdAt": zod.coerce.date()
 })
 export const ListInquiriesResponse = zod.array(ListInquiriesResponseItem)

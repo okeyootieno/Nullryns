@@ -22,6 +22,7 @@ function toJson(r: typeof inquiriesTable.$inferSelect) {
     timeline: r.timeline,
     description: r.description,
     status: r.status,
+    isRead: r.isRead,
     createdAt: r.createdAt.toISOString(),
   };
 }
@@ -90,6 +91,27 @@ inquiriesRouter.patch("/inquiries/:id/status", requireAdmin, async (req, res) =>
   const [updated] = await db
     .update(inquiriesTable)
     .set({ status })
+    .where(eq(inquiriesTable.id, id))
+    .returning();
+
+  if (!updated) {
+    res.status(404).json({ error: "Inquiry not found" });
+    return;
+  }
+
+  res.json(toJson(updated));
+});
+
+inquiriesRouter.patch("/inquiries/:id/read", requireAdmin, async (req, res) => {
+  const id = parseInt(req.params.id as string, 10);
+  if (isNaN(id)) {
+    res.status(400).json({ error: "Invalid inquiry ID" });
+    return;
+  }
+
+  const [updated] = await db
+    .update(inquiriesTable)
+    .set({ isRead: true })
     .where(eq(inquiriesTable.id, id))
     .returning();
 

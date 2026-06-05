@@ -269,6 +269,148 @@ export function useListContactMessages<TData = Awaited<ReturnType<typeof listCon
 
 
 
+export const getMarkContactMessageReadUrl = (id: number,) => {
+
+
+
+
+  return `/api/contact/${id}/read`
+}
+
+/**
+ * Marks a contact message as read
+ * @summary Mark contact message as read
+ */
+export const markContactMessageRead = async (id: number, options?: RequestInit): Promise<ContactMessage> => {
+
+  return customFetch<ContactMessage>(getMarkContactMessageReadUrl(id),
+  {
+    ...options,
+    method: 'PATCH'
+
+
+  }
+);}
+
+
+
+
+export const getMarkContactMessageReadMutationOptions = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markContactMessageRead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof markContactMessageRead>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['markContactMessageRead'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof markContactMessageRead>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  markContactMessageRead(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type MarkContactMessageReadMutationResult = NonNullable<Awaited<ReturnType<typeof markContactMessageRead>>>
+
+    export type MarkContactMessageReadMutationError = ErrorType<ApiError>
+
+    /**
+ * @summary Mark contact message as read
+ */
+export const useMarkContactMessageRead = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markContactMessageRead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof markContactMessageRead>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getMarkContactMessageReadMutationOptions(options));
+    }
+
+export const getMarkInquiryReadUrl = (id: number,) => {
+
+
+
+
+  return `/api/inquiries/${id}/read`
+}
+
+/**
+ * Marks a project inquiry as read
+ * @summary Mark inquiry as read
+ */
+export const markInquiryRead = async (id: number, options?: RequestInit): Promise<Inquiry> => {
+
+  return customFetch<Inquiry>(getMarkInquiryReadUrl(id),
+  {
+    ...options,
+    method: 'PATCH'
+
+
+  }
+);}
+
+
+
+
+export const getMarkInquiryReadMutationOptions = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markInquiryRead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof markInquiryRead>>, TError,{id: number}, TContext> => {
+
+const mutationKey = ['markInquiryRead'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof markInquiryRead>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  markInquiryRead(id,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type MarkInquiryReadMutationResult = NonNullable<Awaited<ReturnType<typeof markInquiryRead>>>
+
+    export type MarkInquiryReadMutationError = ErrorType<ApiError>
+
+    /**
+ * @summary Mark inquiry as read
+ */
+export const useMarkInquiryRead = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof markInquiryRead>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof markInquiryRead>>,
+        TError,
+        {id: number},
+        TContext
+      > => {
+      return useMutation(getMarkInquiryReadMutationOptions(options));
+    }
+
 export const getUpdateInquiryStatusUrl = (id: number,) => {
 
 

@@ -34,6 +34,7 @@ export interface ContactMessage {
   /** @nullable */
   service?: string | null;
   message: string;
+  isRead: boolean;
   createdAt: string;
 }
 
@@ -70,6 +71,7 @@ export interface Inquiry {
   timeline?: string | null;
   description: string;
   status: string;
+  isRead: boolean;
   createdAt: string;
 }
 

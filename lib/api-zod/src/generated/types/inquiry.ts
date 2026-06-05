@@ -21,5 +21,6 @@ export interface Inquiry {
   timeline?: string | null;
   description: string;
   status: string;
+  isRead: boolean;
   createdAt: Date;
 }

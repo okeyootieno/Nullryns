@@ -5,12 +5,15 @@ import {
   useListContactMessages,
   useListInquiries,
   useUpdateInquiryStatus,
+  useMarkContactMessageRead,
+  useMarkInquiryRead,
   getListInquiriesQueryKey,
+  getListContactMessagesQueryKey,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { format } from "date-fns";
-import { ChevronDown, ChevronUp, Loader2, LogOut, Lock, Eye, EyeOff } from "lucide-react";
+import { ChevronDown, ChevronUp, Loader2, LogOut, Lock, Eye, EyeOff, CheckCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -201,6 +204,15 @@ function TextExpander({ text, lines = 3 }: { text: string; lines?: number }) {
   );
 }
 
+function UnreadDot() {
+  return (
+    <span className="relative flex h-2.5 w-2.5 shrink-0">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: '#C4A484' }} />
+      <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: '#C4A484' }} />
+    </span>
+  );
+}
+
 const STATUS_COLORS: Record<string, string> = {
   "new": "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800",
   "in-discussion": "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 border-amber-200 dark:border-amber-800",
@@ -214,12 +226,14 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   const [lastFetchTime, setLastFetchTime] = useState(Date.now());
 
   const { data: messages, isLoading: loadingMessages, isError: errorMessages, isFetching: fetchingMessages } =
-    useListContactMessages({ query: { refetchInterval: 30000 } });
+    useListContactMessages({ query: { queryKey: getListContactMessagesQueryKey(), refetchInterval: 30000 } });
 
   const { data: inquiries, isLoading: loadingInquiries, isError: errorInquiries, isFetching: fetchingInquiries } =
-    useListInquiries({ query: { refetchInterval: 30000 } });
+    useListInquiries({ query: { queryKey: getListInquiriesQueryKey(), refetchInterval: 30000 } });
 
   const updateStatus = useUpdateInquiryStatus();
+  const markContactRead = useMarkContactMessageRead();
+  const markInquiryRead = useMarkInquiryRead();
 
   useEffect(() => {
     if (!fetchingMessages && !fetchingInquiries) setLastFetchTime(Date.now());
@@ -232,8 +246,25 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
     );
   };
 
+  const handleMarkContactRead = (id: number) => {
+    markContactRead.mutate(
+      { id },
+      { onSuccess: () => queryClient.invalidateQueries({ queryKey: getListContactMessagesQueryKey() }) }
+    );
+  };
+
+  const handleMarkInquiryRead = (id: number) => {
+    markInquiryRead.mutate(
+      { id },
+      { onSuccess: () => queryClient.invalidateQueries({ queryKey: getListInquiriesQueryKey() }) }
+    );
+  };
+
   const sortedMessages = [...(messages ?? [])].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   const sortedInquiries = [...(inquiries ?? [])].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+  const unreadMessages = sortedMessages.filter(m => !m.isRead).length;
+  const unreadInquiries = sortedInquiries.filter(i => !i.isRead).length;
 
   return (
     <div className="min-h-screen bg-background font-sans">
@@ -243,7 +274,14 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
         <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src="/logo.jpg" alt="Øryns logo" className="w-10 h-10 rounded-full object-cover shadow-sm" />
-            <h1 className="font-serif text-2xl font-bold text-foreground">Admin Dashboard</h1>
+            <div>
+              <h1 className="font-serif text-2xl font-bold text-foreground">Admin Dashboard</h1>
+              {(unreadMessages + unreadInquiries) > 0 && (
+                <p className="text-xs font-sans" style={{ color: '#C4A484' }}>
+                  {unreadMessages + unreadInquiries} unread item{(unreadMessages + unreadInquiries) !== 1 ? "s" : ""}
+                </p>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
@@ -271,6 +309,15 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               <div className="flex items-center gap-3">
                 <h2 className="font-serif text-xl font-semibold">Contact Messages</h2>
                 <Badge variant="secondary" className="font-sans font-medium">{sortedMessages.length}</Badge>
+                {unreadMessages > 0 && (
+                  <span
+                    className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={{ backgroundColor: '#C4A484/20', color: '#C4A484', background: 'rgba(196,164,132,0.18)' }}
+                  >
+                    <UnreadDot />
+                    {unreadMessages} new
+                  </span>
+                )}
               </div>
               <LastUpdated timestamp={lastFetchTime} />
             </div>
@@ -287,34 +334,63 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
             <div className="grid gap-4">
               <AnimatePresence>
-                {sortedMessages.map((msg, i) => (
-                  <motion.div
-                    key={msg.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: Math.min(i * 0.05, 0.4) }}
-                    className="bg-card border border-border p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start gap-4 mb-2">
-                      <div>
-                        <h3 className="font-serif text-lg font-bold">{msg.fullName}</h3>
-                        <a href={`mailto:${msg.email}`} className="text-primary hover:underline text-sm">{msg.email}</a>
-                        {msg.phone && <span className="text-muted-foreground text-sm ml-2">({msg.phone})</span>}
+                {sortedMessages.map((msg, i) => {
+                  const isMarkingRead = markContactRead.isPending && markContactRead.variables?.id === msg.id;
+                  return (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: Math.min(i * 0.05, 0.4) }}
+                      className={`bg-card border p-5 rounded-xl shadow-sm hover:shadow-md transition-all relative overflow-hidden ${
+                        !msg.isRead
+                          ? "border-l-4 border-border"
+                          : "border-border"
+                      }`}
+                      style={!msg.isRead ? { borderLeftColor: '#C4A484' } : undefined}
+                    >
+                      {isMarkingRead && (
+                        <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px] z-10 flex items-center justify-center">
+                          <Loader2 className="w-5 h-5 animate-spin text-primary" />
+                        </div>
+                      )}
+                      <div className="flex justify-between items-start gap-4 mb-2">
+                        <div className="flex items-start gap-2 flex-1 min-w-0">
+                          {!msg.isRead && <UnreadDot />}
+                          <div className="min-w-0">
+                            <h3 className="font-serif text-lg font-bold">{msg.fullName}</h3>
+                            <a href={`mailto:${msg.email}`} className="text-primary hover:underline text-sm">{msg.email}</a>
+                            {msg.phone && <span className="text-muted-foreground text-sm ml-2">({msg.phone})</span>}
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className="text-xs text-muted-foreground block">{format(new Date(msg.createdAt), "MMM d, yyyy")}</span>
+                          <span className="text-xs text-muted-foreground block">{format(new Date(msg.createdAt), "h:mm a")}</span>
+                        </div>
                       </div>
-                      <div className="text-right shrink-0">
-                        <span className="text-xs text-muted-foreground block">{format(new Date(msg.createdAt), "MMM d, yyyy")}</span>
-                        <span className="text-xs text-muted-foreground block">{format(new Date(msg.createdAt), "h:mm a")}</span>
-                      </div>
-                    </div>
-                    {(msg.company || msg.service) && (
-                      <div className="flex flex-wrap gap-2 mt-3 mb-1">
-                        {msg.company && <Badge variant="outline" className="text-xs font-normal">{msg.company}</Badge>}
-                        {msg.service && <Badge className="bg-[#C4A484]/20 text-[#3B2A1E] dark:text-[#C4A484] border-none font-normal text-xs">{msg.service}</Badge>}
-                      </div>
-                    )}
-                    <TextExpander text={msg.message} />
-                  </motion.div>
-                ))}
+                      {(msg.company || msg.service) && (
+                        <div className="flex flex-wrap gap-2 mt-3 mb-1">
+                          {msg.company && <Badge variant="outline" className="text-xs font-normal">{msg.company}</Badge>}
+                          {msg.service && <Badge className="bg-[#C4A484]/20 text-[#3B2A1E] dark:text-[#C4A484] border-none font-normal text-xs">{msg.service}</Badge>}
+                        </div>
+                      )}
+                      <TextExpander text={msg.message} />
+                      {!msg.isRead && (
+                        <div className="mt-3 flex justify-end">
+                          <button
+                            onClick={() => handleMarkContactRead(msg.id)}
+                            disabled={isMarkingRead}
+                            className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all hover:opacity-80 disabled:opacity-40"
+                            style={{ borderColor: 'rgba(196,164,132,0.4)', color: '#C4A484', background: 'rgba(196,164,132,0.08)' }}
+                          >
+                            <CheckCheck className="w-3.5 h-3.5" />
+                            Mark as read
+                          </button>
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </AnimatePresence>
             </div>
           </section>
@@ -325,6 +401,15 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               <div className="flex items-center gap-3">
                 <h2 className="font-serif text-xl font-semibold">Project Inquiries</h2>
                 <Badge variant="secondary" className="font-sans font-medium">{sortedInquiries.length}</Badge>
+                {unreadInquiries > 0 && (
+                  <span
+                    className="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={{ background: 'rgba(196,164,132,0.18)', color: '#C4A484' }}
+                  >
+                    <UnreadDot />
+                    {unreadInquiries} new
+                  </span>
+                )}
               </div>
               <LastUpdated timestamp={lastFetchTime} />
             </div>
@@ -343,22 +428,27 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               <AnimatePresence>
                 {sortedInquiries.map((inquiry, i) => {
                   const isMutating = updateStatus.isPending && updateStatus.variables?.id === inquiry.id;
+                  const isMarkingRead = markInquiryRead.isPending && markInquiryRead.variables?.id === inquiry.id;
                   return (
                     <motion.div
                       key={inquiry.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: Math.min(i * 0.05, 0.4) }}
-                      className="bg-card border border-border p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
+                      className={`bg-card border p-5 rounded-xl shadow-sm hover:shadow-md transition-all relative overflow-hidden ${
+                        !inquiry.isRead ? "border-border" : "border-border"
+                      }`}
+                      style={!inquiry.isRead ? { borderLeft: '4px solid #C4A484' } : undefined}
                     >
-                      {isMutating && (
+                      {(isMutating || isMarkingRead) && (
                         <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px] z-10 flex items-center justify-center">
                           <Loader2 className="w-6 h-6 animate-spin text-primary" />
                         </div>
                       )}
                       <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4 pb-4 border-b border-border/50">
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            {!inquiry.isRead && <UnreadDot />}
                             <h3 className="font-serif text-lg font-bold">{inquiry.fullName}</h3>
                             <Badge className={`font-medium capitalize text-xs ${STATUS_COLORS[inquiry.status] ?? "bg-secondary text-secondary-foreground"}`}>
                               {inquiry.status.replace("-", " ")}
@@ -407,6 +497,19 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                         </div>
                       </div>
                       <TextExpander text={inquiry.description} lines={2} />
+                      {!inquiry.isRead && (
+                        <div className="mt-3 flex justify-end">
+                          <button
+                            onClick={() => handleMarkInquiryRead(inquiry.id)}
+                            disabled={isMarkingRead}
+                            className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-all hover:opacity-80 disabled:opacity-40"
+                            style={{ borderColor: 'rgba(196,164,132,0.4)', color: '#C4A484', background: 'rgba(196,164,132,0.08)' }}
+                          >
+                            <CheckCheck className="w-3.5 h-3.5" />
+                            Mark as read
+                          </button>
+                        </div>
+                      )}
                     </motion.div>
                   );
                 })}
