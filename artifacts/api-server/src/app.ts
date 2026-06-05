@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
   const staticDir = path.resolve(__dirname, "../../nullryns-web/dist/public");
   if (existsSync(staticDir)) {
     app.use(express.static(staticDir));
-    app.get("*", (_req, res) => {
+    app.get("/{*path}", (_req, res) => {
       res.sendFile(path.join(staticDir, "index.html"));
     });
     logger.info({ staticDir }, "Serving static frontend");
