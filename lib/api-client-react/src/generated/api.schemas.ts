@@ -37,6 +37,42 @@ export interface ContactMessage {
   createdAt: string;
 }
 
+export interface InquiryInput {
+  /** @minLength 1 */
+  fullName: string;
+  email: string;
+  /** @nullable */
+  phone?: string | null;
+  /** @nullable */
+  company?: string | null;
+  /** @minLength 1 */
+  serviceType: string;
+  /** @nullable */
+  budgetRange?: string | null;
+  /** @nullable */
+  timeline?: string | null;
+  /** @minLength 1 */
+  description: string;
+}
+
+export interface Inquiry {
+  id: number;
+  fullName: string;
+  email: string;
+  /** @nullable */
+  phone?: string | null;
+  /** @nullable */
+  company?: string | null;
+  serviceType: string;
+  /** @nullable */
+  budgetRange?: string | null;
+  /** @nullable */
+  timeline?: string | null;
+  description: string;
+  status: string;
+  createdAt: string;
+}
+
 export interface ApiError {
   error: string;
 }

@@ -100,13 +100,19 @@ export function Navbar() {
               <span className="sr-only">Toggle theme</span>
             </Button>
             <Link href="/contact">
-              <Button>Let's Talk</Button>
+              <Button variant="outline">Let's Talk</Button>
+            </Link>
+            <Link href="/start-a-project">
+              <Button className="bg-primary hover:bg-secondary text-primary-foreground">Start a Project</Button>
             </Link>
           </div>
         </nav>
 
         {/* Mobile Toggle */}
         <div className="flex items-center gap-4 md:hidden">
+          <Link href="/start-a-project" className="hidden sm:block">
+            <Button size="sm" className="bg-primary hover:bg-secondary text-primary-foreground">Start a Project</Button>
+          </Link>
           <Button
             variant="ghost"
             size="icon"
@@ -139,9 +145,12 @@ export function Navbar() {
               </span>
             </Link>
           ))}
-          <div className="pt-4 mt-2 border-t border-border">
+          <div className="pt-4 mt-2 border-t border-border flex flex-col gap-3">
+            <Link href="/start-a-project">
+              <Button className="w-full bg-primary hover:bg-secondary text-primary-foreground">Start a Project</Button>
+            </Link>
             <Link href="/contact">
-              <Button className="w-full">Let's Talk</Button>
+              <Button variant="outline" className="w-full">Let's Talk</Button>
             </Link>
           </div>
         </div>

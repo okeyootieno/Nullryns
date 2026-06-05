@@ -175,10 +175,36 @@ export default function Home() {
             Whether you need a full-scale business system or want to join our mentorship program, we're ready to grow together.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="h-14 px-10 text-lg bg-primary hover:bg-secondary text-primary-foreground rounded-full">
+            <Button size="lg" variant="outline" className="h-14 px-10 text-lg rounded-full">
               Let's Discuss Your Vision
             </Button>
           </Link>
+        </div>
+      </section>
+
+      {/* Start Project CTA */}
+      <section className="py-32 bg-background border-b border-border overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-full blur-3xl -z-10 translate-x-1/3"></div>
+        <div className="container mx-auto px-6 md:px-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-5xl md:text-7xl font-serif font-bold text-foreground mb-6">
+              Ready to Build Something?
+            </h2>
+            <p className="text-xl text-muted-foreground font-sans max-w-2xl mx-auto mb-12">
+              Submit your project brief and we'll respond within 24 hours with a comprehensive technical and business evaluation.
+            </p>
+            <Link href="/start-a-project">
+              <Button size="lg" className="h-16 px-12 text-xl bg-primary hover:bg-secondary text-primary-foreground group shadow-xl">
+                Start a Project <ArrowRight className="ml-3 w-6 h-6 transition-transform group-hover:translate-x-2" />
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>

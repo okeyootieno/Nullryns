@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: contact
     description: Contact form operations
+  - name: inquiries
+    description: Project inquiry operations
 paths:
   /healthz:
     get:
@@ -65,6 +67,45 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ContactMessage"
+  /inquiries:
+    post:
+      operationId: submitInquiry
+      tags: [inquiries]
+      summary: Submit a project inquiry
+      description: Submits a project brief / inquiry from a potential client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryInput"
+      responses:
+        "201":
+          description: Inquiry submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+    get:
+      operationId: listInquiries
+      tags: [inquiries]
+      summary: List project inquiries
+      description: Returns all submitted project inquiries
+      responses:
+        "200":
+          description: List of inquiries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Inquiry"
 components:
   schemas:
     HealthStatus:
@@ -118,6 +159,68 @@ components:
         service:
           type: ["string", "null"]
         message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    InquiryInput:
+      type: object
+      required:
+        - fullName
+        - email
+        - serviceType
+        - description
+      properties:
+        fullName:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        phone:
+          type: ["string", "null"]
+        company:
+          type: ["string", "null"]
+        serviceType:
+          type: string
+          minLength: 1
+        budgetRange:
+          type: ["string", "null"]
+        timeline:
+          type: ["string", "null"]
+        description:
+          type: string
+          minLength: 1
+    Inquiry:
+      type: object
+      required:
+        - id
+        - fullName
+        - email
+        - serviceType
+        - description
+        - status
+        - createdAt
+      properties:
+        id:
+          type: integer
+        fullName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        company:
+          type: ["string", "null"]
+        serviceType:
+          type: string
+        budgetRange:
+          type: ["string", "null"]
+        timeline:
+          type: ["string", "null"]
+        description:
+          type: string
+        status:
           type: string
         createdAt:
           type: string

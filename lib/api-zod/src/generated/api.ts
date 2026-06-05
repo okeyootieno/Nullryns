@@ -52,3 +52,44 @@ export const ListContactMessagesResponseItem = zod.object({
 export const ListContactMessagesResponse = zod.array(ListContactMessagesResponseItem)
 
 
+/**
+ * Submits a project brief / inquiry from a potential client
+ * @summary Submit a project inquiry
+ */
+
+
+
+
+
+export const SubmitInquiryBody = zod.object({
+  "fullName": zod.string().min(1),
+  "email": zod.string().email(),
+  "phone": zod.string().nullish(),
+  "company": zod.string().nullish(),
+  "serviceType": zod.string().min(1),
+  "budgetRange": zod.string().nullish(),
+  "timeline": zod.string().nullish(),
+  "description": zod.string().min(1)
+})
+
+
+/**
+ * Returns all submitted project inquiries
+ * @summary List project inquiries
+ */
+export const ListInquiriesResponseItem = zod.object({
+  "id": zod.number(),
+  "fullName": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "company": zod.string().nullish(),
+  "serviceType": zod.string(),
+  "budgetRange": zod.string().nullish(),
+  "timeline": zod.string().nullish(),
+  "description": zod.string(),
+  "status": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+export const ListInquiriesResponse = zod.array(ListInquiriesResponseItem)
+
+

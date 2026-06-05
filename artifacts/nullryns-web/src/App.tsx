@@ -13,6 +13,7 @@ import Projects from "@/pages/projects";
 import Team from "@/pages/team";
 import Training from "@/pages/training";
 import Contact from "@/pages/contact";
+import StartAProject from "@/pages/start-a-project";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
@@ -29,6 +30,7 @@ function Router() {
         <Route path="/team" component={Team} />
         <Route path="/training" component={Training} />
         <Route path="/contact" component={Contact} />
+        <Route path="/start-a-project" component={StartAProject} />
         <Route path="/admin/messages" component={Admin} />
         <Route component={NotFound} />
       </Switch>
