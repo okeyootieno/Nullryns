@@ -8,19 +8,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-3 mb-6">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-accent"
-              >
-                <path
-                  d="M50 90C50 90 40 85 45 65C50 45 35 40 30 35C25 30 20 35 20 35C20 35 25 25 35 25C45 25 45 35 50 45C55 35 55 25 65 25C75 25 80 35 80 35C80 35 75 30 70 35C65 40 50 45 55 65C60 85 50 90 50 90Z"
-                  fill="currentColor"
-                />
-              </svg>
+              <img
+                src="/logo.jpg"
+                alt="Øryns logo"
+                className="w-10 h-10 rounded-full object-cover shadow-md border-2 border-primary-foreground/20"
+              />
               <span className="font-serif text-2xl font-bold tracking-tight text-white">
                 Øryns
               </span>

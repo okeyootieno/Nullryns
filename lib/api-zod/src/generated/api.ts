@@ -53,6 +53,33 @@ export const ListContactMessagesResponse = zod.array(ListContactMessagesResponse
 
 
 /**
+ * Updates the status of a project inquiry
+ * @summary Update inquiry status
+ */
+export const UpdateInquiryStatusParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+export const UpdateInquiryStatusBody = zod.object({
+  "status": zod.enum(['new', 'in-discussion', 'quoted', 'closed'])
+})
+
+export const UpdateInquiryStatusResponse = zod.object({
+  "id": zod.number(),
+  "fullName": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "company": zod.string().nullish(),
+  "serviceType": zod.string(),
+  "budgetRange": zod.string().nullish(),
+  "timeline": zod.string().nullish(),
+  "description": zod.string(),
+  "status": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+
+
+/**
  * Submits a project brief / inquiry from a potential client
  * @summary Submit a project inquiry
  */

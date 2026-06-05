@@ -46,22 +46,11 @@ export function Navbar() {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-primary transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-            >
-              <path
-                d="M50 90C50 90 40 85 45 65C50 45 35 40 30 35C25 30 20 35 20 35C20 35 25 25 35 25C45 25 45 35 50 45C55 35 55 25 65 25C75 25 80 35 80 35C80 35 75 30 70 35C65 40 50 45 55 65C60 85 50 90 50 90Z"
-                fill="currentColor"
-              />
-              <circle cx="50" cy="20" r="8" fill="currentColor" />
-              <circle cx="25" cy="45" r="5" fill="currentColor" />
-              <circle cx="75" cy="45" r="5" fill="currentColor" />
-            </svg>
+            <img
+              src="/logo.jpg"
+              alt="Øryns logo"
+              className="w-9 h-9 rounded-full object-cover transition-transform duration-500 group-hover:scale-110 shadow-sm"
+            />
             <span className="font-serif text-2xl font-bold tracking-tight text-foreground">
               Øryns
             </span>

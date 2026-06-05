@@ -73,6 +73,20 @@ export interface Inquiry {
   createdAt: string;
 }
 
+export type InquiryStatusUpdateStatus = typeof InquiryStatusUpdateStatus[keyof typeof InquiryStatusUpdateStatus];
+
+
+export const InquiryStatusUpdateStatus = {
+  new: 'new',
+  'in-discussion': 'in-discussion',
+  quoted: 'quoted',
+  closed: 'closed',
+} as const;
+
+export interface InquiryStatusUpdate {
+  status: InquiryStatusUpdateStatus;
+}
+
 export interface ApiError {
   error: string;
 }

@@ -12,3 +12,5 @@ export * from './contactMessage';
 export * from './healthStatus';
 export * from './inquiry';
 export * from './inquiryInput';
+export * from './inquiryStatusUpdate';
+export * from './inquiryStatusUpdateStatus';

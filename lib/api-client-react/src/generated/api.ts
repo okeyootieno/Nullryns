@@ -25,7 +25,8 @@ import type {
   ContactMessage,
   HealthStatus,
   Inquiry,
-  InquiryInput
+  InquiryInput,
+  InquiryStatusUpdate
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -267,6 +268,79 @@ export function useListContactMessages<TData = Awaited<ReturnType<typeof listCon
 
 
 
+
+export const getUpdateInquiryStatusUrl = (id: number,) => {
+
+
+
+
+  return `/api/inquiries/${id}/status`
+}
+
+/**
+ * Updates the status of a project inquiry
+ * @summary Update inquiry status
+ */
+export const updateInquiryStatus = async (id: number,
+    inquiryStatusUpdate: InquiryStatusUpdate, options?: RequestInit): Promise<Inquiry> => {
+
+  return customFetch<Inquiry>(getUpdateInquiryStatusUrl(id),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      inquiryStatusUpdate,)
+  }
+);}
+
+
+
+
+export const getUpdateInquiryStatusMutationOptions = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateInquiryStatus>>, TError,{id: number;data: BodyType<InquiryStatusUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateInquiryStatus>>, TError,{id: number;data: BodyType<InquiryStatusUpdate>}, TContext> => {
+
+const mutationKey = ['updateInquiryStatus'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateInquiryStatus>>, {id: number;data: BodyType<InquiryStatusUpdate>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateInquiryStatus(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateInquiryStatusMutationResult = NonNullable<Awaited<ReturnType<typeof updateInquiryStatus>>>
+    export type UpdateInquiryStatusMutationBody = BodyType<InquiryStatusUpdate>
+    export type UpdateInquiryStatusMutationError = ErrorType<ApiError>
+
+    /**
+ * @summary Update inquiry status
+ */
+export const useUpdateInquiryStatus = <TError = ErrorType<ApiError>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateInquiryStatus>>, TError,{id: number;data: BodyType<InquiryStatusUpdate>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateInquiryStatus>>,
+        TError,
+        {id: number;data: BodyType<InquiryStatusUpdate>},
+        TContext
+      > => {
+      return useMutation(getUpdateInquiryStatusMutationOptions(options));
+    }
 
 export const getSubmitInquiryUrl = () => {
 

@@ -67,6 +67,43 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ContactMessage"
+  /inquiries/{id}/status:
+    patch:
+      operationId: updateInquiryStatus
+      tags: [inquiries]
+      summary: Update inquiry status
+      description: Updates the status of a project inquiry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InquiryStatusUpdate"
+      responses:
+        "200":
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inquiry"
+        "404":
+          description: Inquiry not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
   /inquiries:
     post:
       operationId: submitInquiry
@@ -225,6 +262,14 @@ components:
         createdAt:
           type: string
           format: date-time
+    InquiryStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum: [new, in-discussion, quoted, closed]
     ApiError:
       type: object
       required:
