@@ -13,18 +13,18 @@ const team = [
     bio: "As the founder of Nullryns, Telvin drives the technical vision and architectural decisions for major client systems. With deep expertise in scalable backend development and a passion for leadership, he mentors the team to deliver engineering excellence."
   },
   {
-    id: "clinton",
-    name: "Clinton Nzau",
-    role: "Full Stack Developer",
-    skills: ["Frontend", "Backend Integration", "DB Design"],
-    bio: "Clinton bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
-  },
-  {
     id: "michael",
     name: "Michael Mike",
+    role: "Full Stack Developer",
+    skills: ["Frontend", "Backend Integration", "DB Design"],
+    bio: "Michael bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
+  },
+  {
+    id: "clinton",
+    name: "Clinton Nzau",
     role: "Software Developer",
     skills: ["App Dev", "Testing", "Maintenance"],
-    bio: "Michael is obsessed with reliability. He builds, tests, and maintains applications with an eagle eye for detail, ensuring that the software Nullryns ships is virtually bug-free and highly maintainable."
+    bio: "Clinton is obsessed with reliability. He builds, tests, and maintains applications with an eagle eye for detail, ensuring that the software Nullryns ships is virtually bug-free and highly maintainable."
   },
   {
     id: "gildysia",
