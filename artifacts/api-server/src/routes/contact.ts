@@ -3,6 +3,7 @@ import { db } from "@workspace/db";
 import { contactMessagesTable } from "@workspace/db";
 import { SubmitContactBody } from "@workspace/api-zod";
 import { requireAdmin } from "../middleware/requireAdmin";
+import { sendContactNotification } from "../lib/email";
 
 const contactRouter = Router();
 
@@ -30,6 +31,15 @@ contactRouter.post("/contact", async (req, res) => {
     message: row.message,
     createdAt: row.createdAt.toISOString(),
   });
+
+  sendContactNotification({
+    fullName: row.fullName,
+    email: row.email,
+    phone: row.phone,
+    company: row.company,
+    service: row.service,
+    message: row.message,
+  }).catch(() => {});
 });
 
 contactRouter.get("/contact", requireAdmin, async (req, res) => {

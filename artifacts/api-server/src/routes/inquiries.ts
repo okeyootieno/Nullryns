@@ -4,6 +4,7 @@ import { db } from "@workspace/db";
 import { inquiriesTable } from "@workspace/db";
 import { SubmitInquiryBody, UpdateInquiryStatusBody } from "@workspace/api-zod";
 import { requireAdmin } from "../middleware/requireAdmin";
+import { sendInquiryNotification } from "../lib/email";
 
 const inquiriesRouter = Router();
 
@@ -49,6 +50,17 @@ inquiriesRouter.post("/inquiries", async (req, res) => {
     .returning();
 
   res.status(201).json(toJson(row));
+
+  sendInquiryNotification({
+    fullName: row.fullName,
+    email: row.email,
+    phone: row.phone,
+    company: row.company,
+    serviceType: row.serviceType,
+    budgetRange: row.budgetRange,
+    timeline: row.timeline,
+    description: row.description,
+  }).catch(() => {});
 });
 
 inquiriesRouter.get("/inquiries", requireAdmin, async (req, res) => {
