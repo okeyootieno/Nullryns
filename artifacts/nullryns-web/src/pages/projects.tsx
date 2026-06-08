@@ -153,11 +153,7 @@ export default function Projects() {
                         <span
 			  key={t}
 			  className="text-xs font-mono px-3 py-1 rounded-full font-medium border"
-			  style={{
-			    color: "#C4A484",
-			    borderColor: "#C4A48433",
-			    backgroundColor: "#C4A48414",
-			  }}
+			  style={{ color: "#C4A484" }}
 			>
                           {t}
                         </span>
