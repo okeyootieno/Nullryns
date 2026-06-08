@@ -150,12 +150,9 @@ export default function Projects() {
                     
                     <div className="flex flex-wrap gap-2 mb-8">
                       {project.tech.map(t => (
-                        <span
-			  key={t}
-			  className="text-xs font-mono px-3 py-1 rounded-full font-medium border"
-			  style={{ color: "#C4A484" }}
-			>
-                          {t}
+			<span
+			  key={t} className="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-medium">
+			  {t}
                         </span>
                       ))}
                     </div>
