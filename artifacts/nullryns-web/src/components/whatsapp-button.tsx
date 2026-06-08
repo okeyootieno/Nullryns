@@ -2,7 +2,7 @@ import { SiWhatsapp } from "react-icons/si";
 
 export function WhatsAppButton() {
   // Replace with actual Nullryns WhatsApp number or link
-  const whatsappUrl = "https://wa.me/254700000000";
+  const whatsappUrl = "https://wa.me/254713171920";
 
   return (
     <a

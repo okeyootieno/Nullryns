@@ -14,7 +14,7 @@ const team = [
   },
   {
     id: "michael",
-    name: "Michael Mike",
+    name: "Michael Muthomi",
     role: "Full Stack Developer",
     skills: ["Frontend", "Backend Integration", "DB Design"],
     bio: "Michael bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
