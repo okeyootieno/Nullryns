@@ -18,12 +18,17 @@ adminAuthRouter.post("/admin/login", (req, res) => {
   }
 
   req.session.isAdmin = true;
+
+  console.log("SESSION ID:", req.sessionID);
+  console.log("SESSION DATA:", req.session);
+
   req.session.save((err) => {
     if (err) {
-      res.status(500).json({ error: "Session error" });
-      return;
+      console.error("SESSION SAVE ERROR:", err);
+      return res.status(500).json({ error: "Failed to save session" });
     }
-    res.json({ ok: true });
+    console.log("SESSION SAVED SUCCESSFULLY");
+    return res.json({ ok: true });
   });
 });
 
