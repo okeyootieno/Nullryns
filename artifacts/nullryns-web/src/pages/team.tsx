@@ -1,6 +1,6 @@
 import { SEO } from "@/components/seo";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
@@ -10,6 +10,7 @@ const team = [
     name: "Telvin Ochieng",
     role: "Founder & Lead Software Engineer",
     skills: ["Architecture", "Backend", "Strategy", "Leadership"],
+    image: "/team/telvin.jpg",
     bio: "As the founder of Nullryns, Telvin drives the technical vision and architectural decisions for major client systems. With deep expertise in scalable backend development and a passion for leadership, he mentors the team to deliver engineering excellence."
   },
   {
@@ -17,6 +18,7 @@ const team = [
     name: "Michael Muthomi",
     role: "Full Stack Developer",
     skills: ["Frontend", "Backend Integration", "DB Design"],
+    image: "/team/michael.jpg",
     bio: "Michael bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
   },
   {
@@ -24,6 +26,7 @@ const team = [
     name: "Clinton Nzau",
     role: "Software Developer",
     skills: ["App Dev", "Testing", "Maintenance"],
+    image: "/team/clinton.jpg",
     bio: "Clinton is obsessed with reliability. He builds, tests, and maintains applications with an eagle eye for detail, ensuring that the software Nullryns ships is virtually bug-free and highly maintainable."
   },
   {
@@ -31,6 +34,7 @@ const team = [
     name: "Gildysia Naomi",
     role: "UI/UX Designer & Product Specialist",
     skills: ["UX Design", "Product Research", "Interface Design"],
+    image: "/team/gildysia.jpg",
     bio: "Gildysia translates complex business requirements into intuitive, beautiful user experiences. Her research-driven design process ensures that every product we build isn't just functional, but a joy to use."
   },
   {
@@ -38,6 +42,7 @@ const team = [
     name: "Stephen Githu",
     role: "Mobile App Developer",
     skills: ["Android", "iOS", "Mobile Optimization"],
+    image: "/team/stephen.jpg",
     bio: "Stephen brings ideas to the palm of your hand. Specializing in native and cross-platform mobile development, he crafts fluid, performant apps optimized for the diverse mobile landscape."
   },
   {
@@ -45,6 +50,7 @@ const team = [
     name: "Levince Okeyo",
     role: "Software Engineer & Solutions Architect",
     skills: ["System Design", "Client Solutions", "Business Analysis"],
+    image: "/team/levince.jpg",
     bio: "Levince excels at the intersection of business and technology. He analyzes client workflows and designs sophisticated system architectures that directly solve complex operational bottlenecks."
   }
 ];
@@ -55,16 +61,16 @@ export default function Team() {
   return (
     <>
       <SEO title="Our Team" description="Meet the passionate builders and mentors at Nullryns (Øryns)." />
-      
+
       <section className="pt-32 pb-20 bg-background">
         <div className="container mx-auto px-6 md:px-12 text-center max-w-4xl">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="text-5xl md:text-7xl font-serif font-bold mb-6 text-foreground"
           >
             The Collective.
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl font-sans text-muted-foreground"
           >
@@ -87,12 +93,17 @@ export default function Team() {
                 className="group cursor-pointer bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/40 transition-all duration-300"
               >
                 <div className="aspect-square relative overflow-hidden bg-secondary/10 flex items-center justify-center p-8">
-                   <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors z-10" />
-                   <Avatar className="w-full h-full max-w-[200px] max-h-[200px] rounded-full border-4 border-background shadow-lg transition-transform duration-500 group-hover:scale-105">
-                     <AvatarFallback className="bg-primary text-primary-foreground font-serif text-5xl">
-                       {member.name.split(" ").map(n => n[0]).join("")}
-                     </AvatarFallback>
-                   </Avatar>
+                  <div className="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors z-10" />
+                  <Avatar className="w-full h-full max-w-[200px] max-h-[200px] rounded-full border-4 border-background shadow-lg transition-transform duration-500 group-hover:scale-105">
+                    <AvatarImage
+                      src={member.image}
+                      alt={member.name}
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="bg-primary text-primary-foreground font-serif text-5xl">
+                      {member.name.split(" ").map(n => n[0]).join("")}
+                    </AvatarFallback>
+                  </Avatar>
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-serif font-bold text-foreground mb-1 group-hover:text-primary transition-colors">{member.name}</h3>
@@ -117,10 +128,15 @@ export default function Team() {
             <>
               <DialogHeader>
                 <div className="flex flex-col md:flex-row gap-6 items-center md:items-start text-center md:text-left mb-6">
-                  <Avatar className="w-32 h-32 border-4 border-border shadow-md">
-                     <AvatarFallback className="bg-primary text-primary-foreground font-serif text-4xl">
-                       {selectedMember.name.split(" ").map(n => n[0]).join("")}
-                     </AvatarFallback>
+                  <Avatar className="w-32 h-32 border-4 border-border shadow-md flex-shrink-0">
+                    <AvatarImage
+                      src={selectedMember.image}
+                      alt={selectedMember.name}
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="bg-primary text-primary-foreground font-serif text-4xl">
+                      {selectedMember.name.split(" ").map(n => n[0]).join("")}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="pt-2">
                     <DialogTitle className="text-3xl font-serif font-bold text-foreground mb-2">
