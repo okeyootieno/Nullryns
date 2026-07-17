@@ -14,12 +14,12 @@ const team = [
     bio: "As the founder of Nullryns, Telvin drives the technical vision and architectural decisions for major client systems. With deep expertise in scalable backend development and a passion for leadership, he mentors the team to deliver engineering excellence."
   },
   {
-    id: "michael",
-    name: "Michael Muthomi",
+    id: "pauline",
+    name: "Pauline Imani",
     role: "Full Stack Developer",
     skills: ["Frontend", "Backend Integration", "DB Design"],
-    image: "/team/michael.jpg",
-    bio: "Michael bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
+    image: "/team/pauline.jpg",
+    bio: "Pauline bridges the gap between elegant interfaces and robust databases. His full-stack capabilities ensure that data flows seamlessly from the server to the user, creating cohesive and performant web applications."
   },
   {
     id: "clinton",
